@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple URL Shortener</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff; /* Couleur de fond claire */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple URL Shortener</h1>
+	<form action="/" method="POST">
+	    <input type="text" name="url" placeholder="Enter your URL here">
+	    <h3>
+		<a href="http://localhost:5000/{{ shorturl }}">
+		{% if shorturl %}
+		    localhost:5000/{{ shorturl }}
+		{% endif %}
+		</a>
+	    </h3>
+	    <div class="buttons">	
+		<button>Create</button>
+	    </div>
+	</form>
+	<br>
+        <a href="/shorturls">Short URLs List</a>
+    </div>
+</body>
+</html>

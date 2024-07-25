@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple URL Shortener</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f8ff; /* Couleur de fond claire */
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+        }
+	table {
+	    table-layout: fixed;
+	    width: 100%;
+	    border-collapse: collapse;
+	    border: 3px solid purple;
+	}
+	tr {
+    	    border: solid 1px;
+	}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Short URLs List</h1>
+	<table>
+	    <tr>
+		<th>ShortURL</th>
+		<th>URL</th>
+		<th>Created At</th>
+		<th>Delete</th>
+	    </tr>
+	    {% for shorturl in shorturls %}
+	    {% if shorturl %}
+	    <tr>
+		<td>
+		    <a href="http://localhost:5000/{{ shorturl.shorturl }}">
+			localhost:5000/{{ shorturl.shorturl }}
+		    </a>
+		</td>
+		<td>{{ shorturl.url }}</td>
+		<td>{{ shorturl.created_at }}</td>
+		<td>
+		    <!--form action="/shorturl" method="delete"-->
+			<input type="hidden" name="shorturl" value="{{ shorturl.shorturl }}" />
+		        <!--a href="/shorturl" data-method="delete">Remove</a-->
+			<button type="submit" onClick="
+					      fetch('/shorturls?shorturl={{ shorturl.shorturl }}', {
+				  method: 'DELETE'
+				});
+				">
+			    Remove
+			</button>
+		
+		</td>
+	    </tr>
+	    {% endif %}
+	    {% endfor %}
+	</table>
+	<br>
+	<a href="/">Create new shortURL</a>
+    </div>
+</body>
+</html>
